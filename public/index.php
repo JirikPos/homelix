@@ -8,7 +8,21 @@
 </head>
 
 <body>
+    <header>
+        <nav>
 
+        </nav>
+    </header>
+
+    <main>
+        <section>
+
+        </section>
+    </main>
+
+    <footer>
+        
+    </footer>
 </body>
 
 </html>
