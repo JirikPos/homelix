@@ -1,5 +1,5 @@
 :root {
-    --barva-pisma: white;
+    --barva-pisma: black;
     --barva-pozadi: rgb(96, 153, 172);
 }
 
@@ -22,14 +22,17 @@ a {
     color: var(--barva-pisma);
 }
 
-a:active {
-    color: black;
-}
-
 nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+nav a {
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
 }
 
 .nav-left {
@@ -39,6 +42,13 @@ nav {
 .nav-center {
     text-align: center;
     flex: 1;
+}
+
+.nav-center h1 {
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
 }
 
 .nav-right {
