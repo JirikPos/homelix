@@ -1,0 +1,2 @@
+# homelix
+Chytřejší domov. Jednoduše.
