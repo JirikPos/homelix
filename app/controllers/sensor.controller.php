@@ -1,35 +1,26 @@
+// app/controllers/SensorController.php
 <?php
 class SensorController
 {
-    private mysqli $conn;
+  private \mysqli $conn;
+  private Sensor  $model;
 
-    public function __construct(mysqli $conn)
-    {
-        $this->conn = $conn;
+  public function __construct(\mysqli $conn, Sensor $model)
+  {
+    $this->conn  = $conn;
+    $this->model = $model;
+  }
+
+  public function store(): void
+  {
+    header('Content-Type: application/json');
+    $input = json_decode(file_get_contents('php://input'), true) ?: $_POST;
+    if (!isset($input['name'], $input['type'])) {
+      http_response_code(400);
+      echo json_encode(['error' => 'Missing name or type']);
+      exit;
     }
-
-    public function store(): void
-    {
-        header('Content-Type: application/json');
-
-        $input = json_decode(file_get_contents('php://input'), true) ?: $_POST;
-        if (!isset($input['value'])) {
-            http_response_code(400);
-            echo json_encode(['error' => 'Missing value']);
-            exit;
-        }
-
-        $stmt = mysqli_prepare(
-            $this->conn,
-            'INSERT INTO measurements (timestamp, value) VALUES (NOW(), ?)'
-        );
-        mysqli_stmt_bind_param($stmt, 'd', $input['value']);
-        if (!mysqli_stmt_execute($stmt)) {
-            http_response_code(500);
-            echo json_encode(['error' => mysqli_error($this->conn)]);
-            exit;
-        }
-
-        echo json_encode(['status'=>'ok','id'=> mysqli_insert_id($this->conn)]);
-    }
+    $id = $this->model->create($input['name'], $input['type'], $input['location'] ?? null);
+    echo json_encode(['status' => 'ok', 'id' => $id]);
+  }
 }

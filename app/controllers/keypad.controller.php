@@ -1,35 +1,25 @@
 <?php
 class KeypadController
 {
-  private mysqli $conn;
+  private \mysqli $conn;
+  private Keypad  $model;
 
-  public function __construct(mysqli $conn)
+  public function __construct(\mysqli $conn, Keypad $model)
   {
-    $this->conn = $conn;
+    $this->conn  = $conn;
+    $this->model = $model;
   }
 
   public function store(): void
   {
     header('Content-Type: application/json');
-
     $input = json_decode(file_get_contents('php://input'), true) ?: $_POST;
-    if (!isset($input['code'])) {
+    if (!isset($input['name'])) {
       http_response_code(400);
-      echo json_encode(['error' => 'Missing code']);
+      echo json_encode(['error' => 'Missing name']);
       exit;
     }
-
-    $stmt = mysqli_prepare(
-      $this->conn,
-      'INSERT INTO keypad_logs (timestamp, code) VALUES (NOW(), ?)'
-    );
-    mysqli_stmt_bind_param($stmt, 's', $input['code']);
-    if (!mysqli_stmt_execute($stmt)) {
-      http_response_code(500);
-      echo json_encode(['error' => mysqli_error($this->conn)]);
-      exit;
-    }
-
-    echo json_encode(['status' => 'ok', 'id' => mysqli_insert_id($this->conn)]);
+    $id = $this->model->create($input['name']);
+    echo json_encode(['status' => 'ok', 'id' => $id]);
   }
 }
