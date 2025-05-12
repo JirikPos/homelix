@@ -1,0 +1,72 @@
+:root {
+    --barva-pisma: black;
+    --barva-pozadi: rgb(96, 153, 172);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    color: var(--barva-pisma);
+    font-family: "Cal Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+header {
+    background-color: var(--barva-pozadi);
+    padding: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--barva-pisma);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav a {
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.nav-left {
+    flex: 1;
+}
+
+.nav-center {
+    text-align: center;
+    flex: 1;
+}
+
+.nav-center h1 {
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.nav-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav-right ul {
+    display: flex;
+    list-style: none;
+    justify-content: flex-end;
+    gap: 40px;
+    margin-right: 35px;
+}
+
+footer {
+    color: var(--barva-pisma);
+    background-color: var(--barva-pozadi);
+    text-align: center;
+}
