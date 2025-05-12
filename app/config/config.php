@@ -1,9 +1,10 @@
 <?php
 return [
-    'db' => [
-        'dsn'     => 'mysql:host=127.0.0.1;dbname=test;charset=utf8',
-        'user'    => 'root',
-        'pass'    => '',
-        'timeout' => 5,
-    ],
+  'db' => [
+    'host'    => '127.0.0.1',
+    'user'    => 'root',
+    'pass'    => '',
+    'name'    => 'test',
+    'timeout' => 5,
+  ],
 ];

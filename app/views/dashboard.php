@@ -4,9 +4,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, width=device-width">
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Apple LiGothic:wght@500&display=swap" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600&display=swap" />
+  <link rel="stylesheet" href="../../public/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -18,18 +19,18 @@
       <div class="tab-controller">
         <div class="o-projektu-parent">
           <div class="o-projektu">O projektu</div>
-          <img class="fi-10206874-icon" alt="" src="../assets/icons/about.svg">
+          <img class="fi-10206874-icon" alt="" src="../../public/assets/icons/about.svg">
 
         </div>
         <div class="tab-controller-child">
         </div>
         <div class="ovldac-panel-parent">
           <div class="ovldac-panel">Ovládací panel</div>
-          <img class="home2alt-icon" alt="" src="../assets/icons/house.svg">
+          <img class="home2alt-icon" alt="" src="../../public/assets/icons/house.svg">
         </div>
       </div>
       <div class="navnotifications-parent">
-        <img class="navprofile-icon" alt="" src="../assets/icons/settings.svg">
+        <img class="navprofile-icon" alt="" src="../../public/assets/icons/settings.svg">
       </div>
     </div>
     <div class="frame-group">
@@ -37,7 +38,7 @@
         <div class="ac-widget">
           <div class="frame-container">
             <div class="frame-parent5">
-              <img class="frame-child" alt="" src="../assets/icons/wind.svg">
+              <img class="frame-child" alt="" src="../../public/assets/icons/wind.svg">
               <div class="index-kvality-ovzdu-parent">
                 <div class="index-kvality-ovzdu">Index kvality ovzduší</div>
                 <div class="wrapper">
@@ -138,8 +139,8 @@
           <div class="menu-options-inner">
             <div class="frame-parent20">
               <div class="alert-sign-parent">
-                <img class="alert-sign-icon" alt="" src="../assets/icons/alert-sign.svg">
-                <img class="home2alt-icon" alt="" src="../assets/icons">
+                <img class="alert-sign-icon" alt="" src="../../public/assets/icons/alert-sign.svg">
+                <img class="home2alt-icon" alt="" src="../../public/assets/icons">
               </div>
               <div class="index-kvality-ovzdu-group">
                 <div class="index-kvality-ovzdu">Index kvality ovzduší</div>

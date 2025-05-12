@@ -1,49 +1,34 @@
 <?php
 class DashboardController
 {
-  private array $dbCfg;
+  private mysqli $conn;
 
-  public function __construct(array $config)
+  public function __construct(mysqli $conn)
   {
-    $this->dbCfg = $config['db'];
+    $this->conn = $conn;
   }
 
-  // HTML stránka
   public function index(): void
   {
     include __DIR__ . '/../views/dashboard.php';
   }
 
-  // JSON data
   public function data(): void
   {
     header('Content-Type: application/json');
 
-    // 1) připojíme PDO s timeoutem
-    try {
-      $pdo = new PDO(
-        $this->dbCfg['dsn'],
-        $this->dbCfg['user'],
-        $this->dbCfg['pass'],
-        [
-          PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-          PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-          PDO::ATTR_TIMEOUT            => $this->dbCfg['timeout'],
-        ]
-      );
-    } catch (PDOException $e) {
+    $sql = 'SELECT timestamp, value
+                  FROM measurements
+                 ORDER BY timestamp DESC
+                 LIMIT 10';
+    $res = mysqli_query($this->conn, $sql);
+    if (!$res) {
       http_response_code(500);
-      echo json_encode(['error' => 'DB connection failed']);
+      echo json_encode(['error' => mysqli_error($this->conn)]);
       exit;
     }
 
-    // 2) načteme posledních 10 záznamů
-    $stmt = $pdo->query(
-      'SELECT timestamp, value 
-             FROM measurements 
-             ORDER BY timestamp DESC 
-             LIMIT 10'
-    );
-    echo json_encode($stmt->fetchAll());
+    $rows = mysqli_fetch_all($res, MYSQLI_ASSOC);
+    echo json_encode($rows);
   }
 }
