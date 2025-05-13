@@ -1,5 +1,5 @@
 <?php
-$config = require __DIR__ . '../../config/config.php';
+$config = require __DIR__ . '../../bootstrap/config.php';
 $db     = $config['db'];
 
 $conn = mysqli_init();
