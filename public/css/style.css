@@ -16,8 +16,13 @@ body {
 body {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    background-image: url('../assets/bac.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed
 }
-
 
 /* Layout */
 .dashboard-columns {
