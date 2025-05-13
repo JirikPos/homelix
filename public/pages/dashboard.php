@@ -4,10 +4,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, width=device-width">
-  <link rel="stylesheet" href="../css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <meta name="author" content="Posavád, Skřivan, Vozka">
+  <meta name="keywords" content="smart hone, chytrá domácnost, automatizace, inteligentní domácnost">
+  <meta name="description"
+    content="Objevte moderní chytrou domácnost s Homelix. Řešení pro bezpečnost, komfort a úsporu energie – vše ovládané jednoduše přes mobil nebo hlasem.">
+  <title>Dashboard</title>
 </head>
 
 <body>
@@ -19,13 +26,13 @@
       </div>
       <div class="nav-bar">
         <div class="o-projektu-parent">
-          <div class="o-projektu">O projektu</div>
+          <div class="o-projektu"><a href="projekt.html">O projektu</a></div>
           <img class="nav-icon" alt="" src="fi_10206874.svg">
         </div>
         <div class="nav-bar-divider">
         </div>
         <div class="ovldac-panel-parent">
-          <div class="ovldac-panel">Ovládací panel</div>
+          <div class="ovldac-panel"><a href="index.html">Ovládací panel</a></div>
           <img class="home2alt-icon" alt="" src="home/2/alt.svg">
           <img class="fi-1047105-icon" alt="" src="fi_1047105.svg">
         </div>
@@ -158,7 +165,11 @@
       </div>
     </div>
   </main>
-
+  <footer class="footer-bar">
+    © <a href="https://www.instagram.com/jirik_pos/">Posavád</a> | <a
+      href="https://www.instagram.com/poldacz/">Skřivan</a> | <a href="https://www.instagram.com/tomvozka">Vozka</a> |
+    2025
+  </footer>
 
 </body>
 
