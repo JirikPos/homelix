@@ -12,17 +12,17 @@
 
 <body>
   <header>
-    <nav class="frame-parent">
+    <div class="frame-parent">
       <div class="homelix-parent">
         <div class="homelix">Homelix</div>
         <img class="navmenu-icon" alt="" src="Nav/Menu.svg">
       </div>
-      <div class="tab-controller">
+      <div class="nav-bar">
         <div class="o-projektu-parent">
           <div class="o-projektu">O projektu</div>
           <img class="fi-10206874-icon" alt="" src="fi_10206874.svg">
         </div>
-        <div class="tab-controller-child">
+        <div class="nav-bar-divider">
         </div>
         <div class="ovldac-panel-parent">
           <div class="ovldac-panel">Ovládací panel</div>
@@ -30,10 +30,10 @@
           <img class="fi-1047105-icon" alt="" src="fi_1047105.svg">
         </div>
       </div>
-      <div class="navnotifications-parent">
-        <img class="navprofile-icon" alt="" src="Nav/Profile.png">
+      <div class="card">
+        <img class="nav-icon" alt="" src="../assets/icons/settings.svg">
       </div>
-    </nav>
+    </div>
   </header>
 
   <main>
