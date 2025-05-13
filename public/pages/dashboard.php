@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, width=device-width">
-  <link rel="stylesheet" href="../../public/css/style.css" />
+  <link rel="stylesheet" href="../css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
@@ -15,21 +15,23 @@
     <div class="frame-parent">
       <div class="homelix-parent">
         <div class="homelix">Homelix</div>
+        <img class="nav-icon" alt="" src="Nav/Menu.svg">
       </div>
       <div class="nav-bar">
-        <div class="ovldac-panel-parent">
-          <div class="ovldac-panel">Ovládací panel</div>
-          <img class="" alt="" src="../../public/assets/icons/house.svg">
+        <div class="o-projektu-parent">
+          <div class="o-projektu">O projektu</div>
+          <img class="nav-icon" alt="" src="fi_10206874.svg">
         </div>
         <div class="nav-bar-divider">
         </div>
-        <div class="o-projektu-parent">
-          <div class="o-projektu">O projektu</div>
-          <img class="" alt="" src="../../public/assets/icons/about.svg">
+        <div class="ovldac-panel-parent">
+          <div class="ovldac-panel">Ovládací panel</div>
+          <img class="home2alt-icon" alt="" src="home/2/alt.svg">
+          <img class="fi-1047105-icon" alt="" src="fi_1047105.svg">
         </div>
       </div>
       <div class="card">
-        <img class="nav-icon" alt="" src="../../public/assets/icons/settings.svg">
+        <img class="nav-icon" alt="" src="../assets/icons/settings.svg">
       </div>
     </div>
   </header>
