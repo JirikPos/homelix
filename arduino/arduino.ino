@@ -155,8 +155,7 @@ void startupSound() {
 }
 
 void initKeypad() {
-  // není potřeba nic, ale pro konzistenci necháno
 }
 char readKeypad() {
-  return keypad.getKey();  // 0 pokud nic
+  return keypad.getKey();
 }
