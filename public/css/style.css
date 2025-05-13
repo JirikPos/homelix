@@ -1,13 +1,25 @@
-body {
+/* Reset & Base Styles */
+* {
+    box-sizing: border-box;
     margin: 0;
-    font-family: 'Lato', sans-serif;
-    color: white;
-    line-height: normal;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+    padding: 0;
 }
 
+html,
+body {
+    height: 100%;
+    font-family: 'Inter';
+    line-height: normal;
+    color: #fff;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Layout */
 .dashboard-columns {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -16,9 +28,24 @@ body {
     margin-top: auto;
 }
 
+.frame-parent {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 32px;
+    text-align: left;
+    gap: 0;
+    color: #fff;
+    font-family: 'Apple LiGothic', sans-serif;
+}
+
+
+/* Cards */
 .column {
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     gap: 20px;
 }
 
@@ -33,13 +60,34 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.card-header {
+.card-header,
+.card-footer {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.card-header {
     font-size: 16px;
 }
 
+.card-value {
+    font-size: 36px;
+    font-weight: 550;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-footer {
+    font-size: 14px;
+    color: #ccc;
+    flex-wrap: wrap;
+}
+
+
+/* Controls & Widgets */
 .switch {
     position: relative;
     display: inline-block;
@@ -55,24 +103,21 @@ body {
 
 .slider {
     position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background-color: #888;
     border-radius: 20px;
     transition: 0.3s;
+    cursor: pointer;
 }
 
-.slider:before {
+.slider::before {
     content: "";
     position: absolute;
-    height: 16px;
     width: 16px;
+    height: 16px;
     left: 2px;
     bottom: 2px;
-    background-color: white;
+    background-color: #fff;
     border-radius: 50%;
     transition: 0.3s;
 }
@@ -81,219 +126,94 @@ input:checked+.slider {
     background-color: #ffb400;
 }
 
-input:checked+.slider:before {
+input:checked+.slider::before {
     transform: translateX(16px);
 }
 
-.card-value {
-    font-size: 36px;
-    font-weight: bold;
+.widget-icon {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
 }
 
-.red {
+
+/* Alerts & Status */
+.alert {
     color: #ff2b2b;
 }
 
-.card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px;
-    color: #ccc;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
 .alert-icon {
-    width: 20px;
-    height: 20px;
-    filter: invert(28%) sepia(100%) saturate(750%) hue-rotate(-10deg);
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    stroke: currentColor;
 }
 
-.homelix {
-    position: relative;
-    font-weight: 500;
-}
 
-.navmenu-icon {
-    width: 50px;
-    border-radius: 10.56px;
-    height: 50px;
-    overflow: hidden;
-    flex-shrink: 0;
-    object-fit: contain;
-    opacity: 0;
-}
-
-.homelix-parent {
-    width: 112px;
+/* Navigation & Tabs */
+.tab-controller {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-}
-
-.o-projektu {
-    width: 77px;
-    position: relative;
-    display: inline-block;
-    flex-shrink: 0;
-    transform: rotate(180deg);
-}
-
-.fi-10206874-icon {
-    width: 16px;
-    position: relative;
-    height: 16px;
-    overflow: hidden;
-    flex-shrink: 0;
-    object-fit: contain;
-    transform: rotate(180deg);
-}
-
-.o-projektu-parent {
-    width: 104px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 8px;
+    gap: 24px;
+    padding: 12px 24px;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(92px);
+    box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.25),
+        0 7px 5px rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    font-size: 16px;
+    transform: rotate(-180deg);
 }
 
 .tab-controller-child {
     width: 1px;
-    position: relative;
-    background-color: #fff;
     height: 29px;
+    background-color: #fff;
     transform: rotate(180deg);
 }
 
-.ovldac-panel {
-    position: relative;
-    font-weight: 600;
-    transform: rotate(180deg);
-}
 
-.home2alt-icon {
-    width: 24px;
-    position: relative;
-    height: 24px;
-    overflow: hidden;
-    flex-shrink: 0;
-    object-fit: contain;
-    transform: rotate(180deg);
-}
-
-.fi-1047105-icon {
-    width: 14px;
-    position: relative;
-    height: 14px;
-    overflow: hidden;
-    flex-shrink: 0;
-    object-fit: contain;
-    transform: rotate(180deg);
-    display: none;
-}
-
+/* Brand & Footer Links */
+.homelix-parent,
+.o-projektu-parent,
 .ovldac-panel-parent {
-    border-radius: 8px;
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    padding: 7px 14px;
+    justify-content: flex-start;
     gap: 8px;
 }
 
-.tab-controller {
-    box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.1) inset, 0px 1px 1px rgba(255, 255, 255, 0.25) inset, 0px 7px 5px rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(92px);
-    border-radius: 12px;
-    background-color: rgba(0, 0, 0, 0.5);
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 12px 24px;
-    gap: 24px;
-    transform: rotate(-180deg);
-    font-size: 16px;
-    font-family: Lato;
+.homelix-parent {
+    width: 112px;
 }
 
-.alert-vector-icon {
-    position: absolute;
-    top: 24.31px;
-    left: 24px;
-    width: 24px;
-    height: 24.3px;
-    overflow: hidden;
-    object-fit: contain;
-    transform: rotate(180deg);
+.o-projektu-parent {
+    width: 104px;
 }
 
-.nudge {
-    position: absolute;
-    right: 9.73px;
-    bottom: -6.6px;
-    border-radius: 50%;
-    background-color: #e51414;
-    width: 6.5px;
-    height: 6.6px;
-    transform: rotate(180deg);
-    transform-origin: 0 0;
+.ovldac-panel-parent {
+    padding: 7px 14px;
+    border-radius: 8px;
 }
 
-.alert-vector-parent {
-    width: 24px;
+.homelix {
+    font-weight: 500;
     position: relative;
-    height: 25px;
 }
 
-.navnotifications {
-    box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.1) inset, 0px 1px 1px rgba(255, 255, 255, 0.25) inset, 0px 7px 5px rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(92px);
-    border-radius: 12px;
-    background-color: rgba(0, 0, 0, 0.5);
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 12.5px 13px;
-    transform: rotate(-180deg);
-    opacity: 0;
-}
-
-.navprofile-icon {
-    width: 50px;
-    border-radius: 12px;
-    height: 50px;
-    overflow: hidden;
+.o-projektu {
+    display: inline-block;
+    width: 77px;
+    transform: rotate(180deg);
     flex-shrink: 0;
-    object-fit: contain;
 }
 
-.navnotifications-parent {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 12px;
-}
-
-.frame-parent {
-    width: 100%;
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0px;
-    text-align: left;
-    font-size: 32px;
-    color: #fff;
-    font-family: 'Apple LiGothic';
+.ovldac-panel {
+    font-weight: 600;
+    transform: rotate(180deg);
 }

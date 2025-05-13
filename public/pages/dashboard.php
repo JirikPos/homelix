@@ -5,8 +5,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, width=device-width">
   <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Apple LiGothic:wght@500&display=swap" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -29,13 +30,6 @@
       </div>
     </div>
     <div class="navnotifications-parent">
-      <div class="navnotifications">
-        <div class="alert-vector-parent">
-          <img class="alert-vector-icon" alt="" src="Alert vector.svg">
-          <div class="nudge">
-          </div>
-        </div>
-      </div>
       <img class="navprofile-icon" alt="" src="Nav/Profile.png">
     </div>
   </div>
@@ -50,10 +44,12 @@
             <span class="slider"></span>
           </label>
         </div>
-        <div class="card-value red">1500</div>
+        <div class="card-value alert">
+          <span class="alert">1500</span>
+          <img src="../../public/assets/icons/warning.svg" alt="Varování" class="widget-icon">
+        </div>
         <div class="card-footer">
           <span class="description">Index kvality ovzduší</span>
-          <img src="alert-icon.svg" alt="Varování" class="alert-icon">
         </div>
       </div>
 
@@ -95,7 +91,10 @@
           <span>Únik vody</span>
           <label class="switch"><input type="checkbox"><span class="slider"></span></label>
         </div>
-        <div class="card-value red">Zjištěn únik vody</div>
+        <div class="card-value">
+          <span class="alert">Zjištěn únik vody</span>
+          <img src="../../public/assets/icons/warning.svg" alt="Varování" class="widget-icon">
+        </div>
         <div class="card-footer">
           <span class="description">Senzor úniku</span>
         </div>
