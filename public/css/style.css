@@ -224,7 +224,6 @@ input:checked+.slider::before {
     font-weight: 600;
 }
 
-
 /* Footer */
 .footer-bar {
     margin-top: 10px;
@@ -238,4 +237,68 @@ input:checked+.slider::before {
 .footer-bar a {
     color: #000;
     text-decoration: none;
+}
+
+.main-content {
+    backdrop-filter: blur(92px);
+    margin: 10px;
+    padding: 24px 32px;
+    border-radius: 16px;
+    box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.25),
+        0 7px 5px rgba(255, 255, 255, 0.05);
+    color: #fff;
+    line-height: 1.6;
+    font-weight: 600;
+}
+
+.main-content-404 {
+    margin-top: 40px;
+    backdrop-filter: blur(92px);
+    padding: 24px 32px;
+    border-radius: 16px;
+    box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.25),
+        0 7px 5px rgba(255, 255, 255, 0.05);
+    color: #fff;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.main-404 {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    height: 100%;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.nav-link {
+    color: gray;
+    transition: color 0.3s ease;
+}
+
+.nav-link.active {
+    color: white;
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    color: #bbb;
+}
+
+.nav-link:active {
+    color: white;
 }
