@@ -25,6 +25,7 @@ require_once __DIR__ . '/../controllers/keypad.controller.php';
 require_once __DIR__ . '/../controllers/alert.controller.php';
 require_once __DIR__ . '/../controllers/email.controller.php';
 require_once __DIR__ . '/../controllers/notfound.controller.php';
+require_once __DIR__ . '/../controllers/info.controller.php';
 
 // Email service
 require_once __DIR__ . '/../service/email.service.php';
@@ -46,6 +47,7 @@ $alertLogModel      = new AlertLog($conn);
 $notFoundController = new NotFoundController();
 $homeController      = new HomeController();
 $dashboardController = new DashboardController();
+$infoController      = new InfoController();
 $sensorController    = new SensorController($sensorModel, $sensorReadingModel);
 $keypadController    = new KeypadController($keypadModel, $keypadEntryModel);
 $alertLogController  = new AlertLogController($alertLogModel);
@@ -168,6 +170,12 @@ if ($method === 'GET' && $path === '/dashboard') {
   $dashboardController->index();
   exit;
 }
+
+if ($method === 'GET' && $path === '/info-o-projektu') {
+  $infoController->index();
+  exit;
+}
+
 if ($method === 'GET' && $path === '/alerts') {
   $alertLogController->index();
   exit;
