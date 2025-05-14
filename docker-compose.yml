@@ -8,9 +8,9 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: database
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: homelix
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpass
     ports:
       - "3306:3306"
     volumes:

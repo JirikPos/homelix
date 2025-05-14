@@ -33,14 +33,6 @@ CREATE TABLE IF NOT EXISTS
     INDEX (`sensor_id`, `created_at`)
   ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
--- Keypads
-CREATE TABLE IF NOT EXISTS
-  `keypads` (
-    `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `name` VARCHAR(50) NOT NULL,
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-  ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
-
 -- Keypad entries
 CREATE TABLE IF NOT EXISTS
   `keypad_entries` (
