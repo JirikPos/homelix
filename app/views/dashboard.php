@@ -11,7 +11,7 @@
     rel="stylesheet">
   <link rel="stylesheet" href="../../public/css/style.css">
   <meta name="author" content="Posavád, Skřivan, Vozka">
-  <meta name="keywords" content="smart hone, chytrá domácnost, automatizace, inteligentní domácnost">
+  <meta name="keywords" content="smart home, chytrá domácnost, automatizace, inteligentní domácnost">
   <meta name="description"
     content="Objevte moderní chytrou domácnost s Homelix. Řešení pro bezpečnost, komfort a úsporu energie – vše ovládané jednoduše přes mobil nebo hlasem.">
   <title>Dashboard</title>
@@ -23,18 +23,19 @@
       <div class="homelix-parent">
         <div class="homelix">Homelix</div>
       </div>
-      <div class="nav-bar">
-        <div class="o-projektu-parent">
-          <div class="o-projektu"><a class="nav-link" href="./info-o-projektu.html">O projektu</a></div>
-          <img class="nav-icon" alt="" src="../../public/assets/icons/about.svg">
+      <nav class="nav-bar">
+        <div class="ovldac-panel-parent">
+          <div class="ovldac-panel"><a class="nav-link active" href="./dashboard">Ovládací panel</a></div>
+          <img class="nav-icon" alt="" src="../../public/assets/icons/house.svg">
         </div>
         <div class="nav-bar-divider">
         </div>
-        <div class="ovldac-panel-parent">
-          <div class="ovldac-panel"><a class="nav-link active" href="./dashboard.html">Ovládací panel</a></div>
-          <img class="nav-icon" alt="" src="../../public/assets/icons/house.svg">
+        <div class="o-projektu-parent">
+          <div class="o-projektu"><a class="nav-link" href="./info-o-projektu">O projektu</a></div>
+          <img class="nav-icon" alt="" src="../../public/assets/icons/about.svg">
         </div>
-      </div>
+
+      </nav>
       <div class="card">
         <img class="nav-icon" alt="" src="../../public/assets/icons/settings.svg">
       </div>
@@ -47,10 +48,7 @@
           <div class="card">
             <div class="card-header">
               <span>Kvalita ovzduší</span>
-              <label class="switch">
-                <input type="checkbox">
-                <span class="slider"></span>
-              </label>
+              <img src="../../public/assets/icons/wind.svg" alt="Varování" class="widget-icon">
             </div>
             <div class="card-value alert">
               <span class="alert">1500</span>
@@ -64,7 +62,7 @@
           <div class="card">
             <div class="card-header">
               <span>Teplota a vlhkost</span>
-              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+              <img src="../../public/assets/icons/temperature.svg" alt="">
             </div>
             <div class="card-value">25 °C</div>
             <div class="card-footer">
@@ -75,29 +73,45 @@
               <span class="description">Aktuální vlhkost</span>
             </div>
           </div>
+          <div class="card">
+            <div class="card-header">
+              <span>Hladina světla</span>
+              <img src="../../public/assets/icons/day.svg" alt="">
+            </div>
+            <div class="card-value">450 L</div>
+            <div class="card-footer">
+              <span class="description">Aktuální hladina světla v místnosti</span>
+            </div>
+          </div>
         </div>
 
         <div class="column">
           <div class="card">
             <div class="card-header">
-              <span>Zvuková výstraha</span>
-              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+              <span>Hlasitost místnosti</span>
+              <img src="../../public/assets/icons/sound.svg" alt="">
             </div>
-            <div class="card-value">Zapnuto</div>
+            <div class="card-value">45 dB</div>
+            <div class="card-footer">
+              <span>Aktuální hlasitost v místnosti</span>
+            </div>
           </div>
 
           <div class="card">
             <div class="card-header">
               <span>Pohybové čidlo PIR</span>
-              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+              <img src="../../public/assets/icons/pir.svg" alt="">
             </div>
-            <div class="card-value">Aktivní</div>
+            <div class="card-value">Pohyb zaznemanán</div>
+            <div class="card-footer">
+              <span>Zjišťuje pohyb v místnosti</span>
+            </div>
           </div>
 
           <div class="card">
             <div class="card-header">
               <span>Únik vody</span>
-              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+              <img src="../../public/assets/icons/water-dropplet.svg" alt="">
             </div>
             <div class="card-value">
               <span class="alert">Zjištěn únik vody</span>
@@ -112,28 +126,49 @@
         <div class="column">
           <div class="card">
             <div class="card-header">
-              <span>Bezpečný režim</span>
+              <span>Ambientní světlo</span>
               <label class="switch"><input type="checkbox"><span class="slider"></span></label>
             </div>
-          </div>
-          <div class="card">
             <div class="card-header">
-              <span>Hlídání úniku vody</span>
+              <span>Ambientní světlo</span>
               <label class="switch"><input type="checkbox"><span class="slider"></span></label>
             </div>
-          </div>
-          <div class="card">
             <div class="card-header">
-              <span>Noční režim</span>
+              <span>Ambientní světlo</span>
+              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+            </div>
+            <div class="card-header">
+              <span>Ambientní světlo</span>
+              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+            </div>
+            <div class="card-header">
+              <span>Ambientní světlo</span>
               <label class="switch"><input type="checkbox"><span class="slider"></span></label>
             </div>
           </div>
           <div class="card">
             <div class="card-header">
               <span>Scény</span>
-              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+              <img src="../../public/assets/icons/computer.svg" alt="">
             </div>
-            <div class="card-value">3 aktivní</div>
+            <div class="scenes">
+              <div>
+                <button class="scene"><img src="../../public/assets/icons/day.svg" alt=""></button>
+                <span>Den</span>
+              </div>
+              <div>
+                <button class="scene"><img src="../../public/assets/icons/night.svg" alt=""></button>
+                <span>Noc</span>
+              </div>
+              <div>
+                <button class="scene"><img src="../../public/assets/icons/leave.svg" alt=""></button>
+                <span>Odchod</span>
+              </div>
+              <div>
+                <button class="scene"><img src="../../public/assets/icons/arrive.svg" alt=""></button>
+                <span>Příchod</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -141,27 +176,54 @@
           <div class="card">
             <div class="card-header">
               <span>Ambientní světlo</span>
-              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+              <span>Online</span>
             </div>
             <div class="card-header">
               <span>Ambientní světlo</span>
-              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+              <span>Online</span>
             </div>
             <div class="card-header">
               <span>Ambientní světlo</span>
-              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+              <span>Online</span>
             </div>
             <div class="card-header">
               <span>Ambientní světlo</span>
-              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+              <span>Online</span>
             </div>
             <div class="card-header">
               <span>Ambientní světlo</span>
-              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+              <span>Online</span>
+            </div>
+            <div class="card-header">
+              <span>Ambientní světlo</span>
+              <span>Online</span>
+            </div>
+            <div class="card-header">
+              <span>Ambientní světlo</span>
+              <span>Online</span>
             </div>
           </div>
+          <div class="card">
+            <div>
+              <input type="text" class="keypad-display" readonly placeholder="Zadejte kód">
+            </div>
+            <div class="keypad">
+              <div><button class="scene">1</button></div>
+              <div><button class="scene">2</button></div>
+              <div><button class="scene">3</button></div>
+              <div><button class="scene">4</button></div>
+              <div><button class="scene">5</button></div>
+              <div><button class="scene">6</button></div>
+              <div><button class="scene">7</button></div>
+              <div><button class="scene">8</button></div>
+              <div><button class="scene">9</button></div>
+              <div><button class="scene">←</button></div>
+              <div><button class="scene">0</button></div>
+              <div><button class="scene">↵</button></div>
+            </div>
+          </div>
+
         </div>
-      </div>
     </main>
     <footer class="footer-bar">
       <a href="https://www.instagram.com/jirik_pos/">Posavád</a> | <a
@@ -171,5 +233,5 @@
   </div>
 
 </body>
-
+<script src="../../public/js/api/sensor.api.js"></script>
 </html>

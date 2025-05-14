@@ -25,13 +25,13 @@
       </div>
       <div class="nav-bar">
         <div class="o-projektu-parent">
-          <div class="o-projektu"><a class="nav-link active" href="./info-o-projektu.html">O projektu</a></div>
+          <div class="o-projektu"><a class="nav-link active" href="./info-o-projektu">O projektu</a></div>
           <img class="nav-icon" alt="" src="../../public/assets/icons/about.svg">
         </div>
         <div class="nav-bar-divider">
         </div>
         <div class="ovldac-panel-parent">
-          <div class="ovldac-panel"><a class="nav-link" href="./dashboard.html">Ovládací panel</a></div>
+          <div class="ovldac-panel"><a class="nav-link" href="./dashboard">Ovládací panel</a></div>
           <img class="nav-icon" alt="" src="../../public/assets/icons/house.svg">
         </div>
       </div>

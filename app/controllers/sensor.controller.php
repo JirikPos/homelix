@@ -13,13 +13,13 @@ class SensorController
   // sensors
   public function listSensors(): void
   {
-    header('Content-Type: application/json');
+    header('Content-Type: application/json; charset=utf-8');
     echo json_encode($this->sensorModel->getAll());
   }
 
   public function getSensor(): void
   {
-    header('Content-Type: application/json');
+    header('Content-Type: application/json; charset=utf-8');
     $id = (int)($_GET['id'] ?? 0);
     $item = $this->sensorModel->getById($id);
     http_response_code($item ? 200 : 404);
@@ -62,7 +62,7 @@ class SensorController
   // readings
   public function listReadings(): void
   {
-    header('Content-Type: application/json');
+    header('Content-Type: application/json; charset=utf-8');
     echo json_encode($this->readingModel->getAll());
   }
 

@@ -176,11 +176,6 @@ if ($method === 'GET' && $path === '/info-o-projektu') {
   exit;
 }
 
-if ($method === 'GET' && $path === '/alerts') {
-  $alertLogController->index();
-  exit;
-}
-
 if (http_response_code(404)) {
   $notFoundController->index();
   exit;
