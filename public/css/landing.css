@@ -1,0 +1,95 @@
+body {
+  font-family: var(--font-family-base);
+  background: url('../assets/images/landing.jpg') center/cover no-repeat fixed;
+  color: var(--color-white);
+  margin: 0; 
+  padding: 0;
+}
+
+.landing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+.homelix-logo {
+  height: 48px;
+  max-width: 160px;
+  object-fit: contain;
+}
+
+.nav-bar {
+  display: flex;
+  gap: var(--gap-lg);
+}
+
+.nav-link {
+  color: var(--color-white);
+  text-decoration: none;
+  font-size: var(--font-size-md);
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #bbb;
+}
+
+.hero {
+  position: relative;
+  z-index: 1;
+  padding: 160px 20px 100px;
+  text-align: center;
+}
+
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 20px;
+  margin-bottom: 30px;
+  color: var(--color-gray);
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn-primary {
+  color: var(--color-black);
+}
+
+.btn-primary:hover {
+  background-color: #e0a200;
+}
+
+.btn-secondary {
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+.btn-secondary:hover {
+  background-color: #eaeaea;
+}
+
+.footer-bar {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  font-size: var(--font-size-xs);
+  color: var(--color-gray);
+}
