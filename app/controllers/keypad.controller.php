@@ -9,29 +9,6 @@ class KeypadController
     }
 
     // keypad entries
-    public function listEntries(): void
-    {
-        header('Content-Type: application/json');
-        echo json_encode($this->entryModel->getAll());
-    }
-
-    public function getEntry(): void
-    {
-        header('Content-Type: application/json');
-        $id = (int)($_GET['id'] ?? 0);
-        $item = $this->entryModel->getById($id);
-        http_response_code($item ? 200 : 404);
-        echo json_encode($item);
-    }
-
-    public function listEntriesByKeypad(): void
-    {
-        header('Content-Type: application/json');
-        $keypadId = (int)($_GET['keypad_id'] ?? 0);
-        $limit    = isset($_GET['limit']) ? (int)$_GET['limit'] : 50;
-        echo json_encode($this->entryModel->getByKeypad($keypadId, $limit));
-    }
-
     public function createEntry(): void
     {
         header('Content-Type: application/json');
@@ -41,13 +18,5 @@ class KeypadController
             (int)$input['code']
         );
         echo json_encode(['id' => $id]);
-    }
-
-    public function deleteEntry(): void
-    {
-        header('Content-Type: application/json');
-        $id = (int)($_GET['id'] ?? 0);
-        $success = $this->entryModel->delete($id);
-        echo json_encode(['success' => $success]);
     }
 }

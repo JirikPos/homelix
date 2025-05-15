@@ -28,25 +28,6 @@ class SensorController
     $this->respond(['id' => $id]);
   }
 
-  public function updateSensor(): void
-  {
-    $input = $this->input();
-    $ok = $this->sensorModel->update(
-      (int)$input['id'],
-      $input['name'],
-      $input['type'],
-      $input['location'] ?? null
-    );
-    $this->respond(['success' => $ok]);
-  }
-
-  public function deleteSensor(): void
-  {
-    $id = (int)($_GET['id'] ?? 0);
-    $ok = $this->sensorModel->delete($id);
-    $this->respond(['success' => $ok]);
-  }
-
   // Readings
   public function getReadings(): void
   {

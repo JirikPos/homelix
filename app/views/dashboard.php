@@ -16,14 +16,15 @@
     content="Objevte moderní chytrou domácnost s Homelix. Řešení pro bezpečnost, komfort a úsporu energie – vše ovládané jednoduše přes mobil nebo hlasem.">
   <title>Dashboard</title>
   <link rel="shortcut icon" href="../../public/assets/images/icon.png" type="image/png">
+  <script defer src="../../public/js/cursor.js"></script>
 </head>
 
 <body>
   <header>
     <div class="frame-parent">
-      <div class="homelix-parent">
+      <a href="/dashboard">
         <img class="homelix-logo" src="../../public/assets/images/logo.png" alt="">
-      </div>
+      </a>
       <nav class="nav-bar">
         <div class="ovldac-panel-parent">
           <div class="ovldac-panel"><a class="nav-link active" href="./dashboard">Ovládací panel</a></div>
@@ -199,23 +200,25 @@
             </div>
             <div class="scenes">
               <div>
-                <button class="scene"><img src="../../public/assets/icons/day.svg" alt=""></button>
+                <button class="scene" data-id="1"><img src="../../public/assets/icons/day.svg" alt=""></button>
                 <span>Den</span>
               </div>
               <div>
-                <button class="scene"><img src="../../public/assets/icons/night.svg" alt=""></button>
+                <button class="scene" data-id="2"><img src="../../public/assets/icons/night.svg" alt=""></button>
                 <span>Noc</span>
               </div>
               <div>
-                <button class="scene"><img src="../../public/assets/icons/leave.svg" alt=""></button>
+                <button class="scene" data-id="3"><img src="../../public/assets/icons/leave.svg" alt=""></button>
                 <span>Odchod</span>
               </div>
               <div>
-                <button class="scene"><img src="../../public/assets/icons/arrive.svg" alt=""></button>
+                <button class="scene" data-id="4"><img src="../../public/assets/icons/arrive.svg" alt=""></button>
                 <span>Příchod</span>
               </div>
             </div>
+
           </div>
+
           <div class="card">
             <div class="card-header">
               <span>Přehrát hudbu</span>
@@ -305,9 +308,13 @@
     </div>
   </div>
 </body>
-<script src="../../public/js/controllers/sensor.js"></script>
-<script src="../../public/js/controllers/states.js"></script>
-<script src="../../public/js/controllers/pheriperals.js"></script>
-<script src="../../public/js/controllers/music.js"></script>
+
+<script src="../../public/js/sensor.js"></script>
+<script src="../../public/js/states.js"></script>
+<script src="../../public/js/pheriperals.js"></script>
+<script src="../../public/js/music.js"></script>
+<script src="../../public/js/keypad.js"></script>
+<script src="../../public/js/scenes.js"></script>
+<script src="../../public/js/alarm.js"></script>
 
 </html>
