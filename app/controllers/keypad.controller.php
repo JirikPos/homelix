@@ -1,56 +1,11 @@
 <?php
 class KeypadController
 {
-    private Keypad       $keypadModel;
     private KeypadEntry  $entryModel;
 
-    public function __construct(Keypad $keypadModel, KeypadEntry $entryModel)
+    public function __construct(KeypadEntry $entryModel)
     {
-        $this->keypadModel  = $keypadModel;
         $this->entryModel   = $entryModel;
-    }
-
-    // keypad
-    public function listKeypads(): void
-    {
-        header('Content-Type: application/json');
-        echo json_encode($this->keypadModel->getAll());
-    }
-
-    public function getKeypad(): void
-    {
-        header('Content-Type: application/json');
-        $id = (int)($_GET['id'] ?? 0);
-        $item = $this->keypadModel->getById($id);
-        http_response_code($item ? 200 : 404);
-        echo json_encode($item);
-    }
-
-    public function createKeypad(): void
-    {
-        header('Content-Type: application/json');
-        $input = json_decode(file_get_contents('php://input'), true) ?: $_POST;
-        $id = $this->keypadModel->create($input['name']);
-        echo json_encode(['id' => $id]);
-    }
-
-    public function updateKeypad(): void
-    {
-        header('Content-Type: application/json');
-        $input = json_decode(file_get_contents('php://input'), true) ?: $_POST;
-        $success = $this->keypadModel->update(
-            (int)$input['id'],
-            $input['name']
-        );
-        echo json_encode(['success' => $success]);
-    }
-
-    public function deleteKeypad(): void
-    {
-        header('Content-Type: application/json');
-        $id = (int)($_GET['id'] ?? 0);
-        $success = $this->keypadModel->delete($id);
-        echo json_encode(['success' => $success]);
     }
 
     // keypad entries

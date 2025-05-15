@@ -16,6 +16,7 @@
   <meta name="description"
     content="Objevte moderní chytrou domácnost s Homelix. Řešení pro bezpečnost, komfort a úsporu energie – vše ovládané jednoduše přes mobil nebo hlasem.">
   <title>Stránka nenalezena</title>
+  <link rel="shortcut icon" href="../../public/assets/images/icon.png" type="image/png">
 </head>
 
 <body>
