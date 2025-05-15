@@ -24,16 +24,16 @@
       <div class="homelix-parent">
         <img class="homelix-logo" src="../../public/assets/images/logo.png" alt="">
       </div>
-      <div class="nav-bar">
-        <div class="o-projektu-parent">
-          <div class="o-projektu"><a class="nav-link" href="../views/info-o-projektu.php">O projektu</a></div>
-          <img class="nav-icon" alt="" src="../../public/assets/icons/about.svg">
+      <nav class="nav-bar">
+        <div class="ovldac-panel-parent">
+          <div class="ovldac-panel"><a class="nav-link active" href="./dashboard">Ovládací panel</a></div>
+          <img class="nav-icon" alt="" src="../../public/assets/icons/house.svg">
         </div>
         <div class="nav-bar-divider">
         </div>
-        <div class="ovldac-panel-parent">
-          <div class="ovldac-panel"><a class="nav-link active" href="../views/dashboard.php">Ovládací panel</a></div>
-          <img class="nav-icon" alt="" src="../../public/assets/icons/house.svg">
+        <div class="o-projektu-parent">
+          <div class="o-projektu"><a class="nav-link" href="./info-o-projektu">O projektu</a></div>
+          <img class="nav-icon" alt="" src="../../public/assets/icons/about.svg">
         </div>
 
       </nav>
