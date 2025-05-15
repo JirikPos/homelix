@@ -15,13 +15,14 @@
   <meta name="description"
     content="Objevte moderní chytrou domácnost s Homelix. Řešení pro bezpečnost, komfort a úsporu energie – vše ovládané jednoduše přes mobil nebo hlasem.">
   <title>Dashboard</title>
+  <link rel="shortcut icon" href="../../public/assets/images/icon.png" type="image/png">
 </head>
 
 <body>
   <header>
     <div class="frame-parent">
       <div class="homelix-parent">
-        <div class="homelix">Homelix</div>
+        <img class="homelix-logo" src="../../public/assets/images/logo.png" alt="">
       </div>
       <nav class="nav-bar">
         <div class="ovldac-panel-parent">
@@ -134,26 +135,63 @@
         <div class="column">
           <div class="card">
             <div class="card-header">
-              <span>Ambientní světlo</span>
-              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+              <span>Ambientní světlo 1</span>
+              <label class="switch">
+                <input type="checkbox" id="peripheral-1" data-id="1">
+                <span class="slider"></span>
+              </label>
             </div>
             <div class="card-header">
-              <span>Ambientní světlo</span>
-              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+              <span>Ambientní světlo 2</span>
+              <label class="switch">
+                <input type="checkbox" id="peripheral-2" data-id="2">
+                <span class="slider"></span>
+              </label>
             </div>
             <div class="card-header">
-              <span>Ambientní světlo</span>
-              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+              <span>Ventilátor</span>
+              <label class="switch">
+                <input type="checkbox" id="peripheral-3" data-id="3">
+                <span class="slider"></span>
+              </label>
             </div>
             <div class="card-header">
-              <span>Ambientní světlo</span>
-              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+              <span>Relé čerpadla</span>
+              <label class="switch">
+                <input type="checkbox" id="peripheral-4" data-id="4">
+                <span class="slider"></span>
+              </label>
             </div>
             <div class="card-header">
-              <span>Ambientní světlo</span>
-              <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+              <span>Zvukový signál</span>
+              <label class="switch">
+                <input type="checkbox" id="peripheral-5" data-id="5">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="card-header">
+              <span>LED pásek</span>
+              <label class="switch">
+                <input type="checkbox" id="peripheral-6" data-id="6">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="card-header">
+              <span>Závora</span>
+              <label class="switch">
+                <input type="checkbox" id="peripheral-7" data-id="7">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="card-header">
+              <span>Noční osvětlení</span>
+              <label class="switch">
+                <input type="checkbox" id="peripheral-8" data-id="8">
+                <span class="slider"></span>
+              </label>
             </div>
           </div>
+
           <div class="card">
             <div class="card-header">
               <span>Scény</span>
@@ -178,39 +216,61 @@
               </div>
             </div>
           </div>
+          <div class="card">
+            <div class="card-header">
+              <span>Přehrát hudbu</span>
+              <img class="widget-icon" src="../../public/assets/icons/spotify.svg" alt="Spotify logo">
+            </div>
+            <div>
+              <div class="music-control">
+                <div>
+                  <span>Právě hraje</span>
+                  <div>
+                    <span class="music-title">Není vybráno</span>
+                  </div>
+                </div>
+                <div class="music-controls">
+                  <button class="previous"><img src="../../public/assets/icons/previous.svg" alt=""></button>
+                  <button class="play-pause"><img src="../../public/assets/icons/play.svg" alt=""></button>
+                  <button class="next"><img src="../../public/assets/icons/next.svg" alt=""></button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="column">
           <div class="card">
             <div class="card-header">
-              <span>Ambientní světlo</span>
-              <span>Online</span>
+              <span>Teplotní senzor</span>
+              <span id="status-TEMPERATURE" class="sensor-status">Načítám…</span>
             </div>
             <div class="card-header">
-              <span>Ambientní světlo</span>
-              <span>Online</span>
+              <span>Vlhkostní senzor</span>
+              <span id="status-HUMIDITY" class="sensor-status">Načítám…</span>
             </div>
             <div class="card-header">
-              <span>Ambientní světlo</span>
-              <span>Online</span>
+              <span>Hlukový senzor</span>
+              <span id="status-SOUND" class="sensor-status">Načítám…</span>
             </div>
             <div class="card-header">
-              <span>Ambientní světlo</span>
-              <span>Online</span>
+              <span>Senzor světla</span>
+              <span id="status-LIGHT" class="sensor-status">Načítám…</span>
             </div>
             <div class="card-header">
-              <span>Ambientní světlo</span>
-              <span>Online</span>
+              <span>Senzor plynu</span>
+              <span id="status-GAS" class="sensor-status">Načítám…</span>
             </div>
             <div class="card-header">
-              <span>Ambientní světlo</span>
-              <span>Online</span>
+              <span>Senzor vody</span>
+              <span id="status-WATER" class="sensor-status">Načítám…</span>
             </div>
             <div class="card-header">
-              <span>Ambientní světlo</span>
-              <span>Online</span>
+              <span>Pohybový senzor (PIR)</span>
+              <span id="status-PIR" class="sensor-status">Načítám…</span>
             </div>
           </div>
+
           <div class="card">
             <div>
               <input type="text" class="keypad-display" readonly placeholder="Zadejte kód">
@@ -230,7 +290,6 @@
               <div><button class="scene">↵</button></div>
             </div>
           </div>
-
         </div>
     </main>
     <footer class="footer-bar">
@@ -239,8 +298,11 @@
       ©2025 Všechna práva vyhrazena.
     </footer>
   </div>
-
+  <audio id="audio-player" preload="auto"></audio>
 </body>
-<script src="../../public/js/api/sensor.api.js"></script>
+<script src="../../public/js/controllers/sensor.js"></script>
+<script src="../../public/js/controllers/states.js"></script>
+<script src="../../public/js/controllers/pheriperals.js"></script>
+<script src="../../public/js/controllers/music.js"></script>
 
 </html>

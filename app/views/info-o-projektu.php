@@ -15,26 +15,28 @@
   <meta name="description"
     content="Objevte moderní chytrou domácnost s Homelix. Řešení pro bezpečnost, komfort a úsporu energie – vše ovládané jednoduše přes mobil nebo hlasem.">
   <title>O projektu</title>
+  <link rel="shortcut icon" href="../../public/assets/images/icon.png" type="image/png">
 </head>
 
 <body>
   <header>
     <div class="frame-parent">
       <div class="homelix-parent">
-        <div class="homelix">Homelix</div>
+        <img class="homelix-logo" src="../../public/assets/images/logo.png" alt="">
       </div>
-      <div class="nav-bar">
-        <div class="o-projektu-parent">
-          <div class="o-projektu"><a class="nav-link active" href="./info-o-projektu">O projektu</a></div>
-          <img class="nav-icon" alt="" src="../../public/assets/icons/about.svg">
-        </div>
-        <div class="nav-bar-divider">
-        </div>
+      <nav class="nav-bar">
         <div class="ovldac-panel-parent">
           <div class="ovldac-panel"><a class="nav-link" href="./dashboard">Ovládací panel</a></div>
           <img class="nav-icon" alt="" src="../../public/assets/icons/house.svg">
         </div>
-      </div>
+        <div class="nav-bar-divider">
+        </div>
+        <div class="o-projektu-parent">
+          <div class="o-projektu"><a class="nav-link active" href="./info-o-projektu">O projektu</a></div>
+          <img class="nav-icon" alt="" src="../../public/assets/icons/about.svg">
+        </div>
+
+      </nav>
       <div class="card">
         <img class="nav-icon" alt="" src="../../public/assets/icons/settings.svg">
       </div>
