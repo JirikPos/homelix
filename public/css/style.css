@@ -273,13 +273,13 @@ input:checked+.slider::before {
   flex-wrap: wrap;
 }
 
-.music-control > div:first-child {
+.music-control>div:first-child {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.music-control > div:first-child > div {
+.music-control>div:first-child>div {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -508,4 +508,32 @@ input:checked+.slider::before {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.75);
+}
+
+.overlay-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.popup {
+  backdrop-filter: blur(92px);
+  color: var(--color-white);
+  padding: 24px 32px;
+  border-radius: var(--radius-lg);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.25),
+    0 7px 5px rgba(255, 255, 255, 0.05);
+  text-align: center;
+  line-height: 1.6;
+  font-weight: 600;
+  display: none;
 }
