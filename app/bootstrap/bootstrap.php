@@ -13,7 +13,6 @@ $conn     = $database->init();
 // Models
 require_once __DIR__ . '/../models/sensor-reading.model.php';
 require_once __DIR__ . '/../models/sensor.model.php';
-require_once __DIR__ . '/../models/keypad.model.php';
 require_once __DIR__ . '/../models/keypad-entry.model.php';
 require_once __DIR__ . '/../models/alert-log.model.php';
 
@@ -40,7 +39,6 @@ $emailCtrl = new EmailController($emailSvc);
 
 $sensorReadingModel = new SensorReading($conn);
 $sensorModel        = new Sensor($conn);
-$keypadModel        = new Keypad($conn);
 $keypadEntryModel   = new KeypadEntry($conn);
 $alertLogModel      = new AlertLog($conn);
 
@@ -49,7 +47,7 @@ $homeController      = new HomeController();
 $dashboardController = new DashboardController();
 $infoController      = new InfoController();
 $sensorController    = new SensorController($sensorModel, $sensorReadingModel);
-$keypadController    = new KeypadController($keypadModel, $keypadEntryModel);
+$keypadController    = new KeypadController($keypadEntryModel);
 $alertLogController  = new AlertLogController($alertLogModel);
 
 $path   = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
@@ -77,45 +75,20 @@ if ($method === 'DELETE' && $path === '/api/sensors') {
   exit;
 }
 
-if ($method === 'GET'  && $path === '/api/readings') {
-  $sensorController->listReadings();
+if ($method === 'GET' && $path === '/api/readings') {
+  $sensorController->getReadings();
   exit;
 }
-if ($method === 'GET'  && $path === '/api/readings/item') {
-  $sensorController->getReading();
-  exit;
-}
-if ($method === 'GET'  && $path === '/api/readings/by-sensor') {
+if ($method === 'GET' && $path === '/api/readings/by-sensor') {
   $sensorController->getReadingsBySensor();
   exit;
 }
+if ($method === 'GET' && $path === '/api/readings/last') {
+  $sensorController->getLastReadingsForAllSensors();
+  exit;
+}
 if ($method === 'POST' && $path === '/api/readings') {
-  $sensorController->createReading();
-  exit;
-}
-if ($method === 'DELETE' && $path === '/api/readings') {
-  $sensorController->deleteReading();
-  exit;
-}
-
-if ($method === 'GET'  && $path === '/api/keypads') {
-  $keypadController->listKeypads();
-  exit;
-}
-if ($method === 'GET'  && $path === '/api/keypads/item') {
-  $keypadController->getKeypad();
-  exit;
-}
-if ($method === 'POST' && $path === '/api/keypads') {
-  $keypadController->createKeypad();
-  exit;
-}
-if ($method === 'PUT'  && $path === '/api/keypads') {
-  $keypadController->updateKeypad();
-  exit;
-}
-if ($method === 'DELETE' && $path === '/api/keypads') {
-  $keypadController->deleteKeypad();
+  $sensorController->getLastReadingsForAllSensors();
   exit;
 }
 

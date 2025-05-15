@@ -45,13 +45,14 @@
     <main>
       <div class="dashboard-columns">
         <div class="column">
+          <!-- Kvalita ovzduší / GAS -->
           <div class="card">
             <div class="card-header">
               <span>Kvalita ovzduší</span>
               <img src="../../public/assets/icons/wind.svg" alt="Varování" class="widget-icon">
             </div>
-            <div class="card-value alert">
-              <span class="alert">1500</span>
+            <div class="card-value" id="value-GAS">
+              <span class="alert">Načítám…</span>
               <img src="../../public/assets/icons/warning.svg" alt="Varování" class="widget-icon">
             </div>
             <div class="card-footer">
@@ -59,26 +60,29 @@
             </div>
           </div>
 
+          <!-- Teplota a vlhkost -->
           <div class="card">
             <div class="card-header">
               <span>Teplota a vlhkost</span>
               <img src="../../public/assets/icons/temperature.svg" alt="">
             </div>
-            <div class="card-value">25 °C</div>
+            <div class="card-value" id="value-TEMPERATURE">Načítám…</div>
             <div class="card-footer">
               <span class="description">Aktuální teplota</span>
             </div>
-            <div class="card-value">50 %</div>
+            <div class="card-value" id="value-HUMIDITY">Načítám…</div>
             <div class="card-footer">
               <span class="description">Aktuální vlhkost</span>
             </div>
           </div>
+
+          <!-- Světlo -->
           <div class="card">
             <div class="card-header">
               <span>Hladina světla</span>
               <img src="../../public/assets/icons/day.svg" alt="">
             </div>
-            <div class="card-value">450 L</div>
+            <div class="card-value" id="value-LIGHT">Načítám…</div>
             <div class="card-footer">
               <span class="description">Aktuální hladina světla v místnosti</span>
             </div>
@@ -86,35 +90,38 @@
         </div>
 
         <div class="column">
+          <!-- Zvuk -->
           <div class="card">
             <div class="card-header">
               <span>Hlasitost místnosti</span>
               <img src="../../public/assets/icons/sound.svg" alt="">
             </div>
-            <div class="card-value">45 dB</div>
+            <div class="card-value" id="value-SOUND">Načítám…</div>
             <div class="card-footer">
               <span>Aktuální hlasitost v místnosti</span>
             </div>
           </div>
 
+          <!-- PIR -->
           <div class="card">
             <div class="card-header">
               <span>Pohybové čidlo PIR</span>
               <img src="../../public/assets/icons/pir.svg" alt="">
             </div>
-            <div class="card-value">Pohyb zaznemanán</div>
+            <div class="card-value" id="value-PIR">Načítám…</div>
             <div class="card-footer">
               <span>Zjišťuje pohyb v místnosti</span>
             </div>
           </div>
 
+          <!-- Únik vody -->
           <div class="card">
             <div class="card-header">
               <span>Únik vody</span>
               <img src="../../public/assets/icons/water-dropplet.svg" alt="">
             </div>
-            <div class="card-value">
-              <span class="alert">Zjištěn únik vody</span>
+            <div class="card-value" id="value-WATER">
+              <span>Načítám…</span>
               <img src="../../public/assets/icons/warning.svg" alt="Varování" class="widget-icon">
             </div>
             <div class="card-footer">
@@ -122,6 +129,7 @@
             </div>
           </div>
         </div>
+
 
         <div class="column">
           <div class="card">
@@ -234,4 +242,5 @@
 
 </body>
 <script src="../../public/js/api/sensor.api.js"></script>
+
 </html>

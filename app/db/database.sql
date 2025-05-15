@@ -3,7 +3,25 @@ CREATE DATABASE IF NOT EXISTS `homelix` CHARACTER SET utf8mb4 COLLATE utf8mb4_un
 
 USE `homelix`;
 
--- Sensors definition
+-- Rooms
+CREATE TABLE IF NOT EXISTS
+  `rooms` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(100) NOT NULL,
+    `description` VARCHAR(255) DEFAULT NULL
+  ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+-- Keypads
+CREATE TABLE IF NOT EXISTS
+  `keypads` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(100) NOT NULL,
+    `room_id` INT DEFAULT NULL,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`) ON DELETE SET NULL
+  ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+-- Sensors
 CREATE TABLE IF NOT EXISTS
   `sensors` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
@@ -17,11 +35,12 @@ CREATE TABLE IF NOT EXISTS
       'WATER',
       'PIR'
     ) NOT NULL,
-    `location` VARCHAR(50) DEFAULT NULL,
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    `room_id` INT DEFAULT NULL,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`) ON DELETE SET NULL
   ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
--- Sensor readings (floats or booleans)
+-- Sensor readings
 CREATE TABLE IF NOT EXISTS
   `sensor_readings` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
@@ -85,23 +104,24 @@ CREATE TABLE IF NOT EXISTS
   `scene_actions` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `scene_id` INT NOT NULL,
-    `type` VARCHAR(50) NOT NULL, -- e.g. 'notify','sound','command'
-    `params` JSON NOT NULL, -- action-specific parameters
+    `type` VARCHAR(50) NOT NULL,
+    `params` JSON NOT NULL,
     FOREIGN KEY (`scene_id`) REFERENCES `scenes` (`id`) ON DELETE CASCADE,
     INDEX (`scene_id`)
   ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
--- Peripherals (outputs that Arduino will poll)
+-- Peripherals
 CREATE TABLE IF NOT EXISTS
   `peripherals` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `name` VARCHAR(50) NOT NULL,
     `type` ENUM('LED', 'RELAY', 'FAN', 'BUZZER', 'MOTOR', 'LIGHT') NOT NULL,
-    `location` VARCHAR(50) DEFAULT NULL,
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    `room_id` INT DEFAULT NULL,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+     FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`) ON DELETE SET NULL
   ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
--- Peripheral states (current desired state for each peripheral)
+-- Peripheral states
 CREATE TABLE IF NOT EXISTS
   `peripheral_states` (
     `peripheral_id` INT NOT NULL PRIMARY KEY,
