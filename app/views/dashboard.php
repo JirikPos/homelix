@@ -299,6 +299,11 @@
     </footer>
   </div>
   <audio id="audio-player" preload="auto"></audio>
+  <div class="overlay-popup">
+    <div class="popup">
+      <h2>Vítejte v Homelix</h2>
+    </div>
+  </div>
 </body>
 <script src="../../public/js/controllers/sensor.js"></script>
 <script src="../../public/js/controllers/states.js"></script>
