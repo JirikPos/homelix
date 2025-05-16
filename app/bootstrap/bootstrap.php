@@ -13,151 +13,134 @@ $conn     = $database->init();
 // Models
 require_once __DIR__ . '/../models/sensor-reading.model.php';
 require_once __DIR__ . '/../models/sensor.model.php';
-require_once __DIR__ . '/../models/keypad.model.php';
 require_once __DIR__ . '/../models/keypad-entry.model.php';
-require_once __DIR__ . '/../models/alert-log.model.php';
+require_once __DIR__ . '/../models/alert.model.php';
+require_once __DIR__ . '/../models/scene.model.php';
+require_once __DIR__ . '/../models/peripheral.model.php';
+require_once __DIR__ . '/../models/peripheral-states.model.php';
 
 // Controllers
+require_once __DIR__ . '/../controllers/export.controller.php';
 require_once __DIR__ . '/../controllers/home.controller.php';
 require_once __DIR__ . '/../controllers/dashboard.controller.php';
 require_once __DIR__ . '/../controllers/sensor.controller.php';
 require_once __DIR__ . '/../controllers/keypad.controller.php';
 require_once __DIR__ . '/../controllers/alert.controller.php';
-require_once __DIR__ . '/../controllers/email.controller.php';
+require_once __DIR__ . '/../controllers/peripheral.controller.php';
+require_once __DIR__ . '/../controllers/scene.controller.php';
 require_once __DIR__ . '/../controllers/notfound.controller.php';
 require_once __DIR__ . '/../controllers/info.controller.php';
 
-// Email service
+// Services
+require_once __DIR__ . '/../service/smarthome.service.php';
 require_once __DIR__ . '/../service/email.service.php';
+
+// DI
+$sensorReadingModel = new SensorReading($conn);
+$sensorModel        = new Sensor($conn);
+$keypadEntryModel   = new KeypadEntry($conn);
+$sceneModel        = new Scene($conn);
+$alertModel      = new Alert($conn);
+$peripheralModel = new Peripheral($conn);
+$peripheralStateModel = new PeripheralState($conn);
+
+// Services
 $emailSvc = new EmailService(
   'no-reply@example.com',
   'support@example.com',
   __DIR__ . '/../email'
 );
 
-// DI
-$emailCtrl = new EmailController($emailSvc);
+$smartHomeService = new SmartHomeService(
+  $sensorModel,
+  $sensorReadingModel,
+  $sceneModel,
+  $keypadEntryModel,
+  $peripheralModel,
+  $peripheralStateModel,
+  $alertModel,
+  $emailSvc,
+  $config
+);
+$smartHomeService->evaluateSystem();
 
-$sensorReadingModel = new SensorReading($conn);
-$sensorModel        = new Sensor($conn);
-$keypadModel        = new Keypad($conn);
-$keypadEntryModel   = new KeypadEntry($conn);
-$alertLogModel      = new AlertLog($conn);
-
+$exportController = new ExportController($conn);
 $notFoundController = new NotFoundController();
 $homeController      = new HomeController();
 $dashboardController = new DashboardController();
 $infoController      = new InfoController();
+$sceneController = new SceneController($sceneModel, $alertModel);
 $sensorController    = new SensorController($sensorModel, $sensorReadingModel);
-$keypadController    = new KeypadController($keypadModel, $keypadEntryModel);
-$alertLogController  = new AlertLogController($alertLogModel);
+$keypadController    = new KeypadController($keypadEntryModel);
+$alertController  = new AlertController($alertModel);
+$peripheralController = new PeripheralController($peripheralModel, $peripheralStateModel);
+
 
 $path   = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 $method = $_SERVER['REQUEST_METHOD'];
 
 // API
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && $path === '/api/export') {
+  $exportController->export();
+  exit;
+}
+
+if ($method === 'GET' && $path === '/api/scenes') {
+  $sceneController->getAll();
+  exit;
+}
+
+if ($method === 'GET' && $path === '/api/scenes/active') {
+  $sceneController->getActive();
+  exit;
+}
+
+if ($method === 'PATCH' && $path === '/api/scenes/activate') {
+  $sceneController->activate();
+  exit;
+}
+
+if ($method === 'PATCH' && $path === '/api/scenes/deactivate') {
+  $sceneController->deactivate();
+  exit;
+}
+
+if ($method === 'GET' && $path === '/api/peripherals') {
+  $peripheralController->getAll();
+  exit;
+}
+
+if ($method === 'GET' && $path === '/api/peripherals/states') {
+  $peripheralController->getStates();
+  exit;
+}
+
+if ($method === 'PATCH' && $path === '/api/peripherals/state') {
+  $peripheralController->setState();
+  exit;
+}
+
 if ($method === 'GET'  && $path === '/api/sensors') {
   $sensorController->listSensors();
   exit;
 }
-if ($method === 'GET'  && $path === '/api/sensors/item') {
-  $sensorController->getSensor();
-  exit;
-}
-if ($method === 'POST' && $path === '/api/sensors') {
-  $sensorController->createSensor();
-  exit;
-}
-if ($method === 'PUT'  && $path === '/api/sensors') {
-  $sensorController->updateSensor();
-  exit;
-}
-if ($method === 'DELETE' && $path === '/api/sensors') {
-  $sensorController->deleteSensor();
-  exit;
-}
 
-if ($method === 'GET'  && $path === '/api/readings') {
-  $sensorController->listReadings();
-  exit;
-}
-if ($method === 'GET'  && $path === '/api/readings/item') {
-  $sensorController->getReading();
-  exit;
-}
-if ($method === 'GET'  && $path === '/api/readings/by-sensor') {
+if ($method === 'GET' && $path === '/api/readings/by-sensor') {
   $sensorController->getReadingsBySensor();
   exit;
 }
-if ($method === 'POST' && $path === '/api/readings') {
-  $sensorController->createReading();
-  exit;
-}
-if ($method === 'DELETE' && $path === '/api/readings') {
-  $sensorController->deleteReading();
+if ($method === 'GET' && $path === '/api/readings/last') {
+  $sensorController->getLastReadingsForAllSensors();
   exit;
 }
 
-if ($method === 'GET'  && $path === '/api/keypads') {
-  $keypadController->listKeypads();
-  exit;
-}
-if ($method === 'GET'  && $path === '/api/keypads/item') {
-  $keypadController->getKeypad();
-  exit;
-}
-if ($method === 'POST' && $path === '/api/keypads') {
-  $keypadController->createKeypad();
-  exit;
-}
-if ($method === 'PUT'  && $path === '/api/keypads') {
-  $keypadController->updateKeypad();
-  exit;
-}
-if ($method === 'DELETE' && $path === '/api/keypads') {
-  $keypadController->deleteKeypad();
-  exit;
-}
-
-if ($method === 'GET'  && $path === '/api/keypad-entries') {
-  $keypadController->listEntries();
-  exit;
-}
-if ($method === 'GET'  && $path === '/api/keypad-entries/item') {
-  $keypadController->getEntry();
-  exit;
-}
-if ($method === 'GET'  && $path === '/api/keypad-entries/by-keypad') {
-  $keypadController->listEntriesByKeypad();
-  exit;
-}
 if ($method === 'POST' && $path === '/api/keypad-entries') {
   $keypadController->createEntry();
   exit;
 }
-if ($method === 'DELETE' && $path === '/api/keypad-entries') {
-  $keypadController->deleteEntry();
-  exit;
-}
 
-if ($method === 'GET'  && $path === '/api/alerts') {
-  $alertLogController->data();
-  exit;
-}
-if ($method === 'GET'  && $path === '/api/alerts/item') {
-  $alertLogController->show();
-  exit;
-}
-if ($method === 'GET'  && $path === '/api/alerts/by-sensor') {
-  $alertLogController->bySensor();
-  exit;
-}
-if ($method === 'POST' && $path === '/api/alerts') {
-  $alertLogController->store();
-  exit;
-}
-if ($method === 'DELETE' && $path === '/api/alerts') {
-  $alertLogController->delete();
+if ($method === 'GET'  && $path === '/api/alert') {
+  $alertController->getLast();
   exit;
 }
 

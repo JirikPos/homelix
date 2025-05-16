@@ -4,7 +4,12 @@ return [
     'host'    => '127.0.0.1',
     'user'    => 'root',
     'pass'    => 'root',
-    'name'    => 'database',
-    'timeout' => 5,
+    'name'    => 'homelix',
+    'timeout' => 10,
+  ],
+  'notifications' => [
+    'to' => 'jirkaposavad@gmail.com',
+    'from' => 'alert@homelix.cz',
+    'reply_to' => 'support@example.com',
   ],
 ];

@@ -9,13 +9,19 @@ class EmailService
     {
         $this->from          = $from;
         $this->replyTo       = $replyTo;
-        $this->templatesPath = $templatesPath;
+        $this->templatesPath = rtrim($templatesPath, '/') . '/';
     }
 
-    public function send(string $to, string $subject, string $template): bool
+    public function send(string $to, string $subject, string $template, array $variables = []): bool
     {
+        $templateFile = $this->templatesPath . $template . '.php';
+        if (!file_exists($templateFile)) {
+            throw new RuntimeException("Template '$template' not found.");
+        }
+
+        extract($variables);
         ob_start();
-        include $this->templatesPath . $template . '.php';
+        include $templateFile;
         $body = ob_get_clean();
 
         $headers  = "From: {$this->from}\r\n";
@@ -26,3 +32,4 @@ class EmailService
         return mail($to, $subject, $body, $headers);
     }
 }
+

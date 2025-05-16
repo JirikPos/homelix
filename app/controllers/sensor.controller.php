@@ -1,105 +1,103 @@
 <?php
+
 class SensorController
 {
-  private Sensor          $sensorModel;
-  private SensorReading   $readingModel;
+  public function __construct(
+    private Sensor $sensorModel,
+    private SensorReading $readingModel
+  ) {}
 
-  public function __construct(Sensor $sensorModel, SensorReading $readingModel)
-  {
-    $this->sensorModel  = $sensorModel;
-    $this->readingModel = $readingModel;
-  }
-
-  // sensors
+  // Sensors
   public function listSensors(): void
   {
-    header('Content-Type: application/json; charset=utf-8');
-    echo json_encode($this->sensorModel->getAll());
+    $this->respond($this->sensorModel->getAll());
   }
 
   public function getSensor(): void
   {
-    header('Content-Type: application/json; charset=utf-8');
     $id = (int)($_GET['id'] ?? 0);
-    $item = $this->sensorModel->getById($id);
-    http_response_code($item ? 200 : 404);
-    echo json_encode($item);
+    $sensor = $this->sensorModel->getById($id);
+    http_response_code($sensor ? 200 : 404);
+    $this->respond($sensor);
   }
 
   public function createSensor(): void
   {
-    header('Content-Type: application/json');
-    $input = json_decode(file_get_contents('php://input'), true) ?: $_POST;
-    $id = $this->sensorModel->create(
-      $input['name'],
-      $input['type'],
-      $input['location'] ?? null
-    );
-    echo json_encode(['id' => $id]);
+    $input = $this->input();
+    $id = $this->sensorModel->create($input['name'], $input['type'], $input['location'] ?? null);
+    $this->respond(['id' => $id]);
   }
 
-  public function updateSensor(): void
+  // Readings
+  public function getReadings(): void
   {
-    header('Content-Type: application/json');
-    $input = json_decode(file_get_contents('php://input'), true) ?: $_POST;
-    $ok = $this->sensorModel->update(
-      (int)$input['id'],
-      $input['name'],
-      $input['type'],
-      $input['location'] ?? null
-    );
-    echo json_encode(['success' => $ok]);
-  }
-
-  public function deleteSensor(): void
-  {
-    header('Content-Type: application/json');
-    $id = (int)($_GET['id'] ?? 0);
-    $ok = $this->sensorModel->delete($id);
-    echo json_encode(['success' => $ok]);
-  }
-
-  // readings
-  public function listReadings(): void
-  {
-    header('Content-Type: application/json; charset=utf-8');
-    echo json_encode($this->readingModel->getAll());
-  }
-
-  public function getReading(): void
-  {
-    header('Content-Type: application/json');
-    $id = (int)($_GET['id'] ?? 0);
-    $item = $this->readingModel->getById($id);
-    http_response_code($item ? 200 : 404);
-    echo json_encode($item);
+    $this->respond($this->readingModel->getAll());
   }
 
   public function getReadingsBySensor(): void
   {
-    header('Content-Type: application/json');
     $sensorId = (int)($_GET['sensor_id'] ?? 0);
-    $limit    = isset($_GET['limit']) ? (int)$_GET['limit'] : 100;
-    echo json_encode($this->readingModel->getBySensor($sensorId, $limit));
+    $this->respond($this->readingModel->getAllBySensorId($sensorId));
   }
 
-  public function createReading(): void
+  public function getLastReadingsForAllSensors(): void
   {
-    header('Content-Type: application/json');
-    $input = json_decode(file_get_contents('php://input'), true) ?: $_POST;
-    $id = $this->readingModel->create(
-      (int)$input['sensor_id'],
-      isset($input['value_float']) ? (float)$input['value_float'] : null,
-      isset($input['value_bool'])  ? (bool)$input['value_bool'] : null
-    );
-    echo json_encode(['id' => $id]);
+    $sensors = $this->sensorModel->getAll();
+    $result = [];
+
+    foreach ($sensors as $sensor) {
+      $reading = $this->readingModel->getLastBySensorId((int)$sensor['id']);
+
+      if ($reading) {
+        $result[] = [
+          'sensor_id' => $sensor['id'],
+          'sensor_name' => $sensor['name'],
+          'value_float' => $reading['value_float'],
+          'value_bool' => $reading['value_bool'],
+          'created_at' => $reading['created_at'],
+        ];
+      }
+    }
+
+    $this->respond($result);
   }
 
-  public function deleteReading(): void
+
+  public function createAllSensorReadings(): void
   {
-    header('Content-Type: application/json');
-    $id = (int)($_GET['id'] ?? 0);
-    $ok = $this->readingModel->delete($id);
-    echo json_encode(['success' => $ok]);
+    $input = $this->input();
+    $sensors = $this->sensorModel->getAll();
+    $saved = [];
+
+    foreach ($sensors as $sensor) {
+      $key = $sensor['name'];
+      if (!array_key_exists($key, $input)) continue;
+
+      $value = $input[$key];
+      $valueFloat = is_numeric($value) ? (float)$value : null;
+      $valueBool  = is_bool($value) ? (bool)$value : null;
+
+      $id = $this->readingModel->create(
+        (int)$sensor['id'],
+        $valueFloat,
+        $valueBool
+      );
+
+      $saved[] = ['sensor_id' => $sensor['id'], 'name' => $key, 'reading_id' => $id];
+    }
+
+    $this->respond(['inserted' => $saved]);
+  }
+
+  // Helpers
+  private function input(): array
+  {
+    return json_decode(file_get_contents('php://input'), true) ?: $_POST;
+  }
+
+  private function respond(mixed $data): void
+  {
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($data);
   }
 }
