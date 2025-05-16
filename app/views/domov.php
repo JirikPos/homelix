@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="cs">
 
 <head>
   <meta charset="UTF-8">
@@ -36,7 +36,7 @@
   <footer class="footer-bar">
     <p>&copy; 2025 Homelix. Všechna práva vyhrazena.</p>
   </footer>
+  <script src="../../public/js/particles.js"></script>
 </body>
-<script src="../../public/js/particles.js"></script>
 
 </html>

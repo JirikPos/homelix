@@ -16,11 +16,11 @@ require_once __DIR__ . '/../models/sensor.model.php';
 require_once __DIR__ . '/../models/keypad-entry.model.php';
 require_once __DIR__ . '/../models/alert.model.php';
 require_once __DIR__ . '/../models/scene.model.php';
-require_once __DIR__ . '/../models/keypad.model.php';
 require_once __DIR__ . '/../models/peripheral.model.php';
 require_once __DIR__ . '/../models/peripheral-states.model.php';
 
 // Controllers
+require_once __DIR__ . '/../controllers/export.controller.php';
 require_once __DIR__ . '/../controllers/home.controller.php';
 require_once __DIR__ . '/../controllers/dashboard.controller.php';
 require_once __DIR__ . '/../controllers/sensor.controller.php';
@@ -40,7 +40,6 @@ $sensorReadingModel = new SensorReading($conn);
 $sensorModel        = new Sensor($conn);
 $keypadEntryModel   = new KeypadEntry($conn);
 $sceneModel        = new Scene($conn);
-$keypadModel       = new Keypad($conn);
 $alertModel      = new Alert($conn);
 $peripheralModel = new Peripheral($conn);
 $peripheralStateModel = new PeripheralState($conn);
@@ -57,19 +56,20 @@ $smartHomeService = new SmartHomeService(
   $sensorReadingModel,
   $sceneModel,
   $keypadEntryModel,
-  $keypadModel,
   $peripheralModel,
   $peripheralStateModel,
   $alertModel,
-  $emailSvc
+  $emailSvc,
+  $config
 );
 $smartHomeService->evaluateSystem();
 
+$exportController = new ExportController($conn);
 $notFoundController = new NotFoundController();
 $homeController      = new HomeController();
 $dashboardController = new DashboardController();
 $infoController      = new InfoController();
-$sceneController = new SceneController($sceneModel);
+$sceneController = new SceneController($sceneModel, $alertModel);
 $sensorController    = new SensorController($sensorModel, $sensorReadingModel);
 $keypadController    = new KeypadController($keypadEntryModel);
 $alertController  = new AlertController($alertModel);
@@ -80,6 +80,11 @@ $path   = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 $method = $_SERVER['REQUEST_METHOD'];
 
 // API
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && $path === '/api/export') {
+  $exportController->export();
+  exit;
+}
+
 if ($method === 'GET' && $path === '/api/scenes') {
   $sceneController->getAll();
   exit;

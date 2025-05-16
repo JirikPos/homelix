@@ -2,31 +2,34 @@
 
 class SmartHomeService
 {
+  private string $notificationEmail;
+
   public function __construct(
     private Sensor $sensorRepo,
     private SensorReading $readingRepo,
     private Scene $sceneRepo,
     private KeypadEntry $keypadRepo,
-    private Keypad $keypadModel,
     private Peripheral $peripheralModel,
     private PeripheralState $peripheralStateModel,
     private Alert $alertRepo,
-    private EmailService $notificationService
-  ) {}
+    private EmailService $notificationService,
+    array $config
+  ) {
+    $this->notificationEmail = $config['notifications']['to'] ?? 'admin@example.com';
+  }
 
   public function evaluateSystem(): void
   {
     $activeScene = $this->sceneRepo->getActive();
     if (!$activeScene) return;
 
-    switch (strtoupper($activeScene['name'])) {
-      case 'AWAY':
+    switch (strtolower($activeScene['name'])) {
+      case 'leave':
         $this->handleAwayScene();
         break;
-      case 'NIGHT':
+      case 'night':
         $this->handleNightScene();
         break;
-      // Můžeš přidat další scény: DAY, ARRIVE atd.
     }
 
     $this->checkKeypadForDeactivation();
@@ -34,35 +37,29 @@ class SmartHomeService
 
   private function handleAwayScene(): void
   {
-    // Kontrola PIR čidel
-    $motionSensors = $this->sensorRepo->getByType('PIR');
-    foreach ($motionSensors as $sensor) {
+    foreach ($this->sensorRepo->getByType('PIR') as $sensor) {
       $reading = $this->readingRepo->getLastBySensorId((int)$sensor['id']);
       if ($reading && (int)$reading['value_bool'] === 1) {
-        $this->notificationService->send('admin@example.com', 'Pohyb detekován', 'pohyb');
-        $this->alertRepo->setAlarm(true);
+        $this->notificationService->send($this->notificationEmail, 'Pohyb detekován', 'pohyb');
+        $this->alertRepo->create('Upozornění, pohyb byl detekován. Kontaktuji vlastníka nemovitosti', true);
         break;
       }
     }
 
-    // Kontrola čidel na vodu
-    $waterSensors = $this->sensorRepo->getByType('WATER');
-    foreach ($waterSensors as $sensor) {
+    foreach ($this->sensorRepo->getByType('WATER') as $sensor) {
       $reading = $this->readingRepo->getLastBySensorId((int)$sensor['id']);
       if ($reading && (int)$reading['value_bool'] === 1) {
-        $this->notificationService->send('admin@example.com', 'Únik vody detekován', 'voda');
-        $this->alertRepo->setAlarm(true);
+        $this->notificationService->send($this->notificationEmail, 'Únik vody detekován', 'voda');
+        $this->alertRepo->create('Upozornění, byl detekován únik vody. Kontaktuji vlastníka nemovitosti', true);
         break;
       }
     }
 
-    // Kontrola plynu
-    $gasSensors = $this->sensorRepo->getByType('GAS');
-    foreach ($gasSensors as $sensor) {
+    foreach ($this->sensorRepo->getByType('GAS') as $sensor) {
       $reading = $this->readingRepo->getLastBySensorId((int)$sensor['id']);
       if ($reading && $reading['value_float'] > 600) {
-        $this->notificationService->send('admin@example.com', 'Únik plynu detekován', 'plyn');
-        $this->alertRepo->setAlarm(true);
+        $this->notificationService->send($this->notificationEmail, 'Únik plynu detekován', 'plyn');
+        $this->alertRepo->create('Upozornění, byl detekován únik plynu. Kontaktuji vlastníka nemovitosti', true);
         break;
       }
     }
@@ -70,24 +67,20 @@ class SmartHomeService
 
   private function handleNightScene(): void
   {
-    // Detekce pohybu v noci
-    $motionSensors = $this->sensorRepo->getByType('PIR');
-    foreach ($motionSensors as $sensor) {
+    foreach ($this->sensorRepo->getByType('PIR') as $sensor) {
       $reading = $this->readingRepo->getLastBySensorId((int)$sensor['id']);
       if ($reading && (int)$reading['value_bool'] === 1) {
-        $this->notificationService->send('admin@example.com', 'Noční pohyb detekován', 'pohyb');
-        $this->alertRepo->setAlarm(true);
+        $this->notificationService->send($this->notificationEmail, 'Noční pohyb detekován', 'pohyb');
+        $this->alertRepo->create('Upozornění, byl detekován pohyb. Kontaktuji vlastníka nemovitosti', true);
         break;
       }
     }
 
-    // Detekce vysoké teploty
-    $tempSensors = $this->sensorRepo->getByType('TEMPERATURE');
-    foreach ($tempSensors as $sensor) {
+    foreach ($this->sensorRepo->getByType('TEMPERATURE') as $sensor) {
       $reading = $this->readingRepo->getLastBySensorId((int)$sensor['id']);
-      if ($reading && $reading['value_float'] > 30.0) {
-        $this->notificationService->send('admin@example.com', 'Vysoká teplota detekována', 'teplota');
-        $this->alertRepo->setAlarm(true);
+      if ($reading && $reading['value_float'] > 40.0) {
+        $this->notificationService->send($this->notificationEmail, 'Vysoká teplota detekována', 'teplota');
+        $this->alertRepo->create('Upozornění, byla detekována vysoká teplota. Kontaktuji vlastníka nemovitosti', true);
         break;
       }
     }
@@ -96,7 +89,8 @@ class SmartHomeService
   private function checkKeypadForDeactivation(): void
   {
     $entry = $this->keypadRepo->getLast();
-    if ($entry && $entry['code'] === 1234) {
+    if ($entry && $entry['code'] === "603603") {
+      $this->alertRepo->create('Alarm deaktivován klávesnicí', false);
       $this->alertRepo->deactivateAll();
     }
   }

@@ -1,59 +1,35 @@
-// const STATUS_ENDPOINT = '/api/sensors/status';
-// const STATUS_INTERVAL_MS = 15000;
+const STATUS_ENDPOINT = '/api/readings/last';
+const STATUS_INTERVAL_MS = 20000;
+const OFFLINE_THRESHOLD_MINUTES = 15;
 
-// async function pollSensorStatus() {
-//   try {
-//     const res = await fetch(STATUS_ENDPOINT, {
-//       method: 'GET',
-//       credentials: 'same-origin',
-//     });
+function isSensorOnline(createdAt) {
+  const now = new Date();
+  const readingTime = new Date(createdAt);
+  const diffMs = now - readingTime;
+  const diffMinutes = diffMs / 1000 / 60;
+  return diffMinutes <= OFFLINE_THRESHOLD_MINUTES;
+}
 
-//     const data = await res.json();
-//     data.forEach(sensor => {
-//       const el = document.getElementById(`status-${sensor.sensor_name}`);
-//       if (el) {
-//         el.textContent = sensor.online ? 'Online' : 'Offline';
-//         el.style.color = sensor.online ? 'green' : 'red';
-//       }
-//     });
-//   } catch (err) {
-//     console.error('Status polling error:', err);
-//   }
-// }
+async function pollSensorStatus() {
+  try {
+    const res = await fetch(STATUS_ENDPOINT, {
+      method: 'GET',
+      credentials: 'same-origin',
+    });
 
-// pollSensorStatus();
-// setInterval(pollSensorStatus, STATUS_INTERVAL_MS);
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  const INTERVAL_MS = 5000;
-
-  const sensors = ['TEMPERATURE', 'HUMIDITY', 'SOUND', 'LIGHT', 'GAS', 'WATER', 'PIR'];
-
-  // Simuluje stav online/offline
-  function generateMockStatus() {
-    return sensors.map(name => ({
-      sensor_name: name,
-      online: Math.random() > 0.5
-    }));
-  }
-
-  function updateStatusUI(statusList) {
-    statusList.forEach(sensor => {
+    const data = await res.json();
+    data.forEach(sensor => {
       const el = document.getElementById(`status-${sensor.sensor_name}`);
       if (el) {
-        el.textContent = sensor.online ? 'Online' : 'Offline';
-        el.style.color = sensor.online ? 'var(--color-success)' : 'var(--color-alert)';
+        const online = isSensorOnline(sensor.created_at);
+        el.textContent = online ? 'Online' : 'Offline';
+        el.style.color = online ? 'green' : 'red';
       }
     });
+  } catch (err) {
+    console.error('Status polling error:', err);
   }
+}
 
-  function simulateStatusPolling() {
-    const mockStatus = generateMockStatus();
-    console.log('Simulovaný stav senzorů:', mockStatus);
-    updateStatusUI(mockStatus);
-  }
-
-  simulateStatusPolling();
-  setInterval(simulateStatusPolling, INTERVAL_MS);
-});
+pollSensorStatus();
+setInterval(pollSensorStatus, STATUS_INTERVAL_MS);

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="cs">
 
 <head>
   <meta charset="utf-8">
@@ -9,7 +9,6 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="../../public/css/style.css">
   <meta name="author" content="Posavád, Skřivan, Vozka">
   <meta name="keywords" content="smart home, chytrá domácnost, automatizace, inteligentní domácnost">
   <meta name="description"
@@ -17,6 +16,8 @@
   <title>Dashboard</title>
   <link rel="shortcut icon" href="../../public/assets/images/icon.png" type="image/png">
   <script defer src="../../public/js/cursor.js"></script>
+  <link rel="stylesheet" href="../../public/css/style.css">
+
 </head>
 
 <body>
@@ -38,7 +39,7 @@
         </div>
 
       </nav>
-      <div class="card">
+      <div class="card" id="openExportPopup">
         <img class="nav-icon" alt="" src="../../public/assets/icons/settings.svg">
       </div>
     </div>
@@ -200,19 +201,19 @@
             </div>
             <div class="scenes">
               <div>
-                <button class="scene" data-id="1"><img src="../../public/assets/icons/day.svg" alt=""></button>
+                <button class="scene" data-id="3"><img src="../../public/assets/icons/day.svg" alt=""></button>
                 <span>Den</span>
               </div>
               <div>
-                <button class="scene" data-id="2"><img src="../../public/assets/icons/night.svg" alt=""></button>
+                <button class="scene" data-id="4"><img src="../../public/assets/icons/night.svg" alt=""></button>
                 <span>Noc</span>
               </div>
               <div>
-                <button class="scene" data-id="3"><img src="../../public/assets/icons/leave.svg" alt=""></button>
+                <button class="scene" data-id="2"><img src="../../public/assets/icons/leave.svg" alt=""></button>
                 <span>Odchod</span>
               </div>
               <div>
-                <button class="scene" data-id="4"><img src="../../public/assets/icons/arrive.svg" alt=""></button>
+                <button class="scene" data-id="1"><img src="../../public/assets/icons/arrive.svg" alt=""></button>
                 <span>Příchod</span>
               </div>
             </div>
@@ -279,21 +280,22 @@
               <input type="text" class="keypad-display" readonly placeholder="Zadejte kód">
             </div>
             <div class="keypad">
-              <div><button class="scene">1</button></div>
-              <div><button class="scene">2</button></div>
-              <div><button class="scene">3</button></div>
-              <div><button class="scene">4</button></div>
-              <div><button class="scene">5</button></div>
-              <div><button class="scene">6</button></div>
-              <div><button class="scene">7</button></div>
-              <div><button class="scene">8</button></div>
-              <div><button class="scene">9</button></div>
-              <div><button class="scene">←</button></div>
-              <div><button class="scene">0</button></div>
-              <div><button class="scene">↵</button></div>
+              <div><button class="key">1</button></div>
+              <div><button class="key">2</button></div>
+              <div><button class="key">3</button></div>
+              <div><button class="key">4</button></div>
+              <div><button class="key">5</button></div>
+              <div><button class="key">6</button></div>
+              <div><button class="key">7</button></div>
+              <div><button class="key">8</button></div>
+              <div><button class="key">9</button></div>
+              <div><button class="key">←</button></div>
+              <div><button class="key">0</button></div>
+              <div><button class="key">↵</button></div>
             </div>
           </div>
         </div>
+      </div>
     </main>
     <footer class="footer-bar">
       <a href="https://www.instagram.com/jirik_pos/">Posavád</a> | <a
@@ -302,19 +304,38 @@
     </footer>
   </div>
   <audio id="audio-player" preload="auto"></audio>
-  <div class="overlay-popup">
+
+  <div class="overlay-popup" id="exportPopup">
     <div class="popup">
-      <h2>Vítejte v Homelix</h2>
+      <div class="popup-header">
+        <h2>Export dat ze senzorů</h2>
+        <span class="close-popup" id="closeExportPopup">&times;</span>
+      </div>
+
+      <div class="popup-body">
+        <p>Vyberte senzory, které chcete exportovat:</p>
+        <div id="sensorList" class="sensor-list">
+          <!-- Checkboxy se doplní JavaScriptem -->
+        </div>
+      </div>
+
+      <div class="popup-footer">
+        <button class="btn-cancel" id="closeExportPopup2">Zavřít</button>
+        <button class="btn-primary" id="exportSensorsBtn">Exportovat</button>
+      </div>
     </div>
   </div>
-</body>
 
-<script src="../../public/js/sensor.js"></script>
-<script src="../../public/js/states.js"></script>
-<script src="../../public/js/pheriperals.js"></script>
-<script src="../../public/js/music.js"></script>
-<script src="../../public/js/keypad.js"></script>
-<script src="../../public/js/scenes.js"></script>
-<script src="../../public/js/alarm.js"></script>
+
+  <script src="../../public/js/sensor.js"></script>
+  <script src="../../public/js/states.js"></script>
+  <script src="../../public/js/pheriperals.js"></script>
+  <script src="../../public/js/music.js"></script>
+  <script src="../../public/js/keypad.js"></script>
+  <script src="../../public/js/scenes.js"></script>
+  <script src="../../public/js/alarm.js"></script>
+  <script src="../../public/js/export.js"></script>
+  <script src="../../public/js/popup.js"></script>
+</body>
 
 </html>

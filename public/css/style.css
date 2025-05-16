@@ -293,6 +293,17 @@ input:checked+.slider::before {
   color: var(--color-white);
 }
 
+.key {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
 /* Music Widget */
 .music-control {
   display: flex;
@@ -524,14 +535,14 @@ input:checked+.slider::before {
   height: 100%;
 }
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.75);
-}
+
+
+
+
+
+
+
+
 
 .overlay-popup {
   position: fixed;
@@ -540,23 +551,81 @@ input:checked+.slider::before {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.75);
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
-  display: none;
+  z-index: 1000;
+}
+
+.overlay-popup.active {
+  display: flex;
 }
 
 .popup {
-  backdrop-filter: blur(92px);
-  color: var(--color-white);
-  padding: 24px 32px;
-  border-radius: var(--radius-lg);
-  box-shadow:
-    inset 0 1px 1px rgba(255, 255, 255, 0.1),
-    inset 0 1px 1px rgba(255, 255, 255, 0.25),
-    0 7px 5px rgba(255, 255, 255, 0.05);
-  text-align: center;
-  line-height: 1.6;
-  font-weight: 600;
-  display: none;
+  background: #1f1f1f;
+  color: white;
+  padding: 24px;
+  border-radius: 10px;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-popup {
+  font-size: 24px;
+  cursor: pointer;
+  color: #aaa;
+}
+
+.popup-body {
+  margin-top: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.popup-body p {
+  margin-top: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.sensor-list label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.popup-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn-primary,
+.btn-cancel {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #ffb400;
+  color: white;
+}
+
+.btn-cancel {
+  background-color: #6c757d;
+  color: white;
 }

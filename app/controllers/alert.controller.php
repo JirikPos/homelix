@@ -11,7 +11,19 @@ class AlertController
     public function getLast(): void
     {
         header('Content-Type: application/json');
+
         $latest = $this->model->getLatest();
-        echo json_encode($latest[0] ?? null);
+
+        if ($latest && isset($latest['alarm'])) {
+            echo json_encode([
+                'active' => (bool)$latest['alarm'],
+                'message' => $latest['name'] ?? ''
+            ]);
+        } else {
+            echo json_encode([
+                'active' => false,
+                'message' => null
+            ]);
+        }
     }
 }

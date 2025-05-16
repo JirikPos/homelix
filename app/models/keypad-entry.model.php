@@ -16,10 +16,10 @@ class KeypadEntry
     return $result->fetch_assoc() ?: null;
   }
 
-  public function create(int $keypadId, int $code): int
+  public function create(int $code): int
   {
-    $stmt = $this->conn->prepare("INSERT INTO {$this->table} (keypad_id, code) VALUES (?, ?)");
-    $stmt->bind_param('ii', $keypadId, $code);
+    $stmt = $this->conn->prepare("INSERT INTO keypad_entries (code) VALUES (?)");
+    $stmt->bind_param('i', $code);
     $stmt->execute();
     return $stmt->insert_id;
   }

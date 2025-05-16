@@ -3,10 +3,12 @@
 class SceneController
 {
   private Scene $model;
+  private Alert $alert;
 
-  public function __construct(Scene $model)
+  public function __construct(Scene $modelScene, Alert $modelAlert)
   {
-    $this->model = $model;
+    $this->model = $modelScene;
+    $this->alert = $modelAlert;
   }
 
   public function getActive(): void
@@ -17,7 +19,6 @@ class SceneController
     if ($activeScene) {
       echo json_encode($activeScene);
     } else {
-      http_response_code(404);
       echo json_encode(['error' => 'Žádná aktivní scéna']);
     }
   }
@@ -47,6 +48,7 @@ class SceneController
     header('Content-Type: application/json');
     $input = json_decode(file_get_contents('php://input'), true);
     $id = isset($input['id']) ? (int)$input['id'] : 0;
+    $this->alert->deactivateAll();
 
     if ($id && $this->model->deactivate($id)) {
       echo json_encode(['success' => true, 'deactivated' => $id]);

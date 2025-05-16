@@ -16,18 +16,14 @@ class Alert
     return $result->fetch_assoc() ?: null;
   }
 
-  public function setAlarm(bool $state): void
+  public function create(string $name, bool $alarm): void
   {
-    $this->create($state);
-  }
-
-  public function create(bool $alarm): void
-  {
-    $stmt = $this->conn->prepare("INSERT INTO {$this->table} (alarm) VALUES (?)");
+    $stmt = $this->conn->prepare("INSERT INTO {$this->table} (name, alarm) VALUES (?, ?)");
     $alarmValue = $alarm ? 1 : 0;
-    $stmt->bind_param('i', $alarmValue);
+    $stmt->bind_param('si', $name, $alarmValue);
     $stmt->execute();
   }
+
 
   public function deactivateAll(): bool
   {
